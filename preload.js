@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-// Exponer solo las funciones de ipcRenderer necesarias al proceso de renderizado
+// Expose secure IPC channels to the renderer process
 contextBridge.exposeInMainWorld('electronAPI', {
     // Exponer la función para enviar mensajes de login al proceso principal
     sendLogin: (data) => ipcRenderer.send('login', data),
@@ -9,9 +9,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     onLoginResponse: (callback) => ipcRenderer.on('login-response', callback),
 
     // Si necesitas exponer otras funciones para otras operaciones, agrégalas aquí de forma segura
-    // Ejemplo (si tuvieras una función para añadir usuarios):
-    // sendAddUser: (userData) => ipcRenderer.send('add-user', userData),
-    // onAddUserResponse: (callback) => ipcRenderer.on('add-user-response', callback)
+    // Exponer la función para llamar a Cloud Functions
+    callCloudFunction: (functionName, data) => ipcRenderer.invoke('call-cloud-function', { functionName, data }),
+
+    // Expose function to send registration data to the main process
+    sendRegistration: (data) => ipcRenderer.send('register', data),
 
     // Evitar exponer otras APIs de Electron o Node.js que no sean necesarias y puedan ser sensibles.
 });

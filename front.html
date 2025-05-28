@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="style.css">
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Gestor - Login</title>
+
+  <script src="cashier_ui.js"></script>
+<body>
+    <header class="header">
+        <h1>T-Gestor: Panel de Taquillero</h1>
+    </header>
+
+    <div class="main-container">
+        <div id="selection-panel" class="panel">
+            <h3>Selección de Lotería y Jugada</h3>
+            <div class="tabs" id="loterias-tabs">
+                </div>
+            <div class="tabs" id="modalidad-tabs">
+                </div>
+            <input type="text" id="play-search-input" class="search-bar" placeholder="Buscar animalito/número o ingresar comando (P123, S100-109, T12)...">
+            <div id="grid-container">
+                </div>
+            <div id="keypad-container">
+                </div>
+        </div>
+
+        <div id="config-panel" class="panel">
+            <h3>Configurar Apuesta</h3>
+            <div>
+                <label for="draw-times">Horarios del Sorteo:</label>
+                <div class="draw-times-container" id="draw-times-container">
+                    </div>
+            </div>
+            <div>
+                <label for="play-input-value">Número/Animalito Seleccionado:</label>
+                <input type="text" id="play-input-value" readonly placeholder="Seleccione del panel izquierdo">
+            </div>
+            <div>
+                <label for="amount-input">Monto:</label>
+                <input type="number" id="amount-input" placeholder="0.00" step="0.01">
+                <div class="amount-buttons">
+                    <button class="amount-button" data-amount="1">$1</button>
+                    <button class="amount-button" data-amount="2">$2</button>
+                    <button class="amount-button" data-amount="5">$5</button>
+                    <button class="amount-button" data-amount="10">Bs.10</button>
+                </div>
+            </div>
+            <div>
+                <label for="currency-select">Moneda:</label>
+                <select id="currency-select">
+                    <option value="USD">USD ($)</option>
+                    <option value="BS">Bolívares (Bs)</option>
+                </select>
+            </div>
+            <button id="add-play-button">[+] AGREGAR A LA JUGADA (Enter)</button>
+        </div>
+
+        <div id="ticket-panel" class="panel">
+            <h3>Ticket Actual</h3>
+            <div id="ticket-plays-list">
+                <p style="text-align: center; color: #888;">Agregue jugadas para verlas aquí.</p>
+            </div>
+            <div class="ticket-totals">
+                <div class="total-bs" id="total-bs">Total Bs: 0.00</div>
+                <div class="total-usd" id="total-usd">Total USD: $0.00</div>
+            </div>
+            <div class="ticket-actions">
+                <button id="generate-ticket-button">GENERAR TICKET (F12)</button>
+                <button id="clear-ticket-button">LIMPIAR TODO (Esc)</button>
+            </div>
+            <button id="pay-prize-button">PAGAR PREMIO (F11)</button>
+        </div>
+    </div>
+
+    <div id="payPrizeModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="closePayPrizeModal">&times;</span>
+            <h3>Pagar Premio</h3>
+            <label for="ticketNumberInput">Número de Ticket:</label>
+            <input type="text" id="ticketNumberInput" placeholder="Ingrese el número del ticket ganador">
+            <div id="prizeDetails" style="margin-top:10px; padding:10px; border:1px solid #eee; min-height: 50px;">
+                </div>
+            <div class="modal-actions" style="margin-top: 15px;">
+                <button id="checkTicketButton" style="background-color: #007bff; color:white;">Verificar Ticket</button>
+                <button id="confirmPaymentButton" style="background-color: #28a745; color:white; display:none;">Confirmar Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

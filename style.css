@@ -1,20 +1,17 @@
 body {
     font-family: 'Roboto', sans-serif; /* Tipografía inspirada en Material Design */
-    padding: 40px; /* Aumenta el padding */
     background-color: #f5f5f5; /* Color de fondo suave */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Altura mínima para centrar verticalmente */
     margin: 0;
 }
 
-body h1 { /* Selector más específico para evitar conflictos */
+h1 { /* Selector más específico para evitar conflictos */
     color: #333; /* Color de encabezado */
     margin-bottom: 30px; /* Espacio debajo del encabezado */
     font-weight: 500; /* Grosor de fuente */
+    text-align: center; /* Centrar el título */
 }
 
+#login-form,
 #login-container {
     background-color: #fff; /* Fondo blanco para el contenedor */
     padding: 40px;
@@ -25,10 +22,87 @@ body h1 { /* Selector más específico para evitar conflictos */
     text-align: left; /* Alineación de texto a la izquierda dentro del contenedor */
 }
 
+#login-form {
+    margin-bottom: 20px; /* Espacio entre el formulario de login y el enlace de registro */
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"] { /* Estilos para campos de entrada de texto y contraseña */
+    width: calc(100% - 22px); /* Ancho completo menos padding y border */
+    padding: 10px; /* Padding interno */
+    margin-bottom: 20px; /* Espacio debajo del campo */
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    box-sizing: border-box; /* Incluir padding y border en el ancho */
+}
+
 label { /* Estilos generales para etiquetas */
     display: block; /* Cada etiqueta en una nueva línea */
     margin-bottom: 8px; /* Espacio debajo de la etiqueta */
     color: #555; /* Color de etiqueta */
     font-weight: 500;
  text-align: left; /* Alineación por defecto a la izquierda */
+}
+
+button { /* Estilos generales para botones */
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color de texto blanco */
+    padding: 12px 20px; /* Padding */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano al pasar por encima */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+    width: 100%; /* Ancho completo */
+}
+
+button:hover { /* Estilo al pasar el ratón por encima */
+    background-color: #0056b3; /* Color de fondo más oscuro */
+}
+
+#loading-indicator {
+    display: none; /* Hidden by default, controlled by JS */
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 9999; /* Ensure it's on top of other content */
+    justify-content: center; /* Center the spinner horizontally */
+    align-items: center; /* Center the spinner vertically */
+}
+
+#loading-indicator::after {
+    content: '';
+    border: 4px solid #f3f3f3; /* Light grey border */
+    border-top: 4px solid #3498db; /* Blue border for the spinner part */
+    border-radius: 50%; /* Make it round */
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Spin animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styling for the Unified Cashier Control Panel (front.html) */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr; /* Example: Left and Right are equal, Middle is wider */
+    gap: 20px; /* Space between columns */
+    padding: 20px;
+    min-height: 100vh; /* Occupy at least the full viewport height */
+}
+
+.panel {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add specific styling for each panel as needed */
 }

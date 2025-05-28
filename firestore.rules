@@ -1,0 +1,103 @@
+firestore
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check if a user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to get the authenticated user's role
+    function getUserRole() {
+      return isAuthenticated() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role : null;
+    }
+
+    // Helper function to get the authenticated user's agencyId
+    function getUserAgencyId() {
+      return isAuthenticated() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.agencyId : null;
+    }
+
+    // Helper function to check if the user is a Super Admin
+    function isSuperAdmin() {
+      return getUserRole() == 'super-admin';
+    }
+
+    // Helper function to check if the user is an Agency Admin
+    function isAgencyAdmin() {
+      return getUserRole() == 'agency-admin';
+    }
+
+    // Helper function to check if the user is a Cashier
+    function isCashier() {
+      return getUserRole() == 'cashier';
+    }
+
+    // Helper function to check if the document belongs to the user's agency
+    function isAgencyDocument(doc) {
+      return isAuthenticated() && doc.agencyId == getUserAgencyId();
+    }
+
+    // --- Agencies Collection Rules ---
+    // Super Admins can read, create, update, and delete agencies.
+    // Agency Admins can read their own agency document.
+    // No access for other users.
+    match /agencies/{agencyId} {
+      allow read: if isSuperAdmin() || (isAgencyAdmin() && request.auth.uid == resource.data.ownerId);
+      allow create, update, delete: if isSuperAdmin();
+    }
+
+    // --- Users Collection Rules ---
+    // Super Admins have full access.
+    // Agency Admins can read and create users within their own agency.
+    // Users can read their own user document.
+    match /users/{userId} {
+      allow read: if isSuperAdmin() || request.auth.uid == userId || (isAgencyAdmin() && resource.data.agencyId == getUserAgencyId());
+      allow create: if isSuperAdmin() || (isAgencyAdmin() && request.resource.data.agencyId == getUserAgencyId());
+      allow update, delete: if isSuperAdmin(); // Only Super Admins can update/delete user documents
+    }
+
+    // --- Betting Houses Collection Rules ---
+    // Super Admins have full access.
+    // Other authenticated users can read betting houses and draws.
+    match /bettingHouses/{houseId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isSuperAdmin();
+
+      match /draws/{drawId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if isSuperAdmin();
+      }
+    }
+
+    // --- Tickets Collection Rules ---
+    // Users (primarily Cashiers) can create tickets within their own agency.
+    // Users can read tickets within their own agency.
+    // No delete or update allowed directly from the client. (Ticket status changes should happen via Cloud Functions).
+    match /tickets/{ticketId} {
+      allow read: if isAgencyDocument(resource.data);
+      allow create: if isAgencyDocument(request.resource.data);
+      // Deny update and delete from client-side
+      allow update, delete: if false;
+
+      // --- Plays Sub-collection Rules ---
+      // Plays inherit read permissions from the parent ticket.
+      // No create, update, or delete allowed directly from the client.
+      match /plays/{playId} {
+         allow read: if get(/databases/$(database)/documents/tickets/$(ticketId)).data.agencyId == getUserAgencyId();
+         allow create, update, delete: if false;
+      }
+    }
+
+    // --- Daily Closures Collection Rules ---
+    // Users (primarily Cashiers and Agency Admins) can create daily closures within their own agency.
+    // Users can read daily closures within their own agency.
+    // No update or delete allowed directly from the client.
+    match /dailyClosures/{closureId} {
+      allow read: if isAgencyDocument(resource.data);
+      allow create: if isAgencyDocument(request.resource.data);
+      // Deny update and delete from client-side
+      allow update, delete: if false;
+    }
+  }
+}
