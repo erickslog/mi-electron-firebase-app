@@ -1,0 +1,24 @@
+# Dependencias de Node
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de Electron y compilación
+/dist
+/build
+*.asar
+*.map
+*.log
+/.cache
+/tmp/
+
+# Entornos de desarrollo específicos (opcional, si usas VS Code)
+.vscode/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Variables de entorno sensibles (¡MUY IMPORTANTE!)
+.env
