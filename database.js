@@ -20,7 +20,7 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CR
 
 // Test user for local testing only - NOT SECURE FOR PRODUCTION
 const testUser = {
-    username: 'test_admin',
+    username: 'test_admin@example.com',
     password: 'password123'
 };
 
