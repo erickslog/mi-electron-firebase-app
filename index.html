@@ -2,16 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Mi Aplicación Electron con Firebase</title>
+    <title>Aplicación de Taquilla de Lotería</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>¡Hola desde Electron y Firebase!</h1>
-    <p id="firebase-status">Cargando Firebase...</p>
-    <button id="login-button">Iniciar Sesión (Google)</button>
-    <button id="logout-button" style="display: none;">Cerrar Sesión</button>
-    <div id="user-info"></div>
+    <h1>Iniciar Sesión</h1>
 
+    <div id="login-container">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required><br><br>
+
+        <label for="clave">Clave:</label>
+        <input type="password" id="clave" name="clave" required><br><br>
+
+        <label for="codigo-agencia">Código de Agencia:</label>
+        <input type="text" id="codigo-agencia" name="codigo-agencia" required><br><br>
+
+        <label for="numero-taquilla">Número de Taquilla:</label>
+        <input type="text" id="numero-taquilla" name="numero-taquilla" required><br><br>
+
+        <button id="login-button">Iniciar Sesión</button>
+
+        <p id="firebase-status"></p> <!-- Para mostrar mensajes de estado -->
+    </div>
     <script src="./renderer.js"></script>
 </body>
 </html>

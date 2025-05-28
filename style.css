@@ -1,5 +1,34 @@
 body {
-    font-family: sans-serif;
-    padding: 20px;
-    text-align: center; /* Alineación de texto centrada */
+    font-family: 'Roboto', sans-serif; /* Tipografía inspirada en Material Design */
+    padding: 40px; /* Aumenta el padding */
+    background-color: #f5f5f5; /* Color de fondo suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Altura mínima para centrar verticalmente */
+    margin: 0;
+}
+
+body h1 { /* Selector más específico para evitar conflictos */
+    color: #333; /* Color de encabezado */
+    margin-bottom: 30px; /* Espacio debajo del encabezado */
+    font-weight: 500; /* Grosor de fuente */
+}
+
+#login-container {
+    background-color: #fff; /* Fondo blanco para el contenedor */
+    padding: 40px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 100%;
+    max-width: 400px; /* Ancho máximo */
+    text-align: left; /* Alineación de texto a la izquierda dentro del contenedor */
+}
+
+label { /* Estilos generales para etiquetas */
+    display: block; /* Cada etiqueta en una nueva línea */
+    margin-bottom: 8px; /* Espacio debajo de la etiqueta */
+    color: #555; /* Color de etiqueta */
+    font-weight: 500;
+ text-align: left; /* Alineación por defecto a la izquierda */
 }
