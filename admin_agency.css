@@ -9,7 +9,7 @@ body {
     min-height: 100vh;
 }
 
-.header {
+header {
     background-color: #2c3e50;
     color: white;
     padding: 15px 20px;
@@ -17,7 +17,7 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.header h1 {
+header h1 {
     margin: 0;
     font-size: 1.8em;
 }
@@ -25,11 +25,11 @@ body {
 .admin-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 20px;
-    padding: 20px;
+    gap: 20px; 
+    padding: 20px; 
     flex-grow: 1;
-    max-width: 1200px; /* Optional: Limit max width */
-    margin: 20px auto; /* Center the container */
+    max-width: 1200px; 
+    margin: 20px auto; 
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
@@ -44,7 +44,7 @@ body {
     flex-direction: column;
 }
 
-.section h2, .section h3 {
+.section h2, .section h3 { 
     color: #2c3e50;
     margin-top: 0;
     border-bottom: 2px solid #3498db;

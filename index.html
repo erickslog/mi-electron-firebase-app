@@ -5,64 +5,8 @@
     <title>Aplicación de Taquilla de Lotería</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-    <div id="login-container">
- <div id="error-message" style="color: red;"></div>
-        <h1>Iniciar Sesión</h1>
-        <form id="login-form">
- <label for="email">Email:</label>
- <input type="email" id="email" name="email" required><br><br>
+<body>
 
- <label for="password">Password:</label>
- <input type="password" id="password" name="password" required><br><br>
-
- <button type="submit">Login</button>
-        </form>
-        <button id="register-agency-button">Register New Agency</button>
-
- <div id="registration-form" style="display: none;">
- <h2>Register New Agency</h2>
- <form id="new-agency-form">
- <label for="agency-name">Agency Name:</label>
- <input type="text" id="agency-name" name="agency-name" required><br><br>
-
- <label for="owner-name">Owner Name:</label>
- <input type="text" id="owner-name" name="owner-name" required><br><br>
-
- <label for="owner-email">Owner Email:</label>
- <input type="email" id="owner-email" name="owner-email" required><br><br>
-
- <label for="new-agency-password">Password:</label>
- <input type="password" id="new-agency-password" name="new-agency-password" required><br><br>
-
- <label for="tax-id">Tax ID:</label>
- <input type="text" id="tax-id" name="tax-id" required><br><br>
-
- <label for="address">Address:</label>
- <input type="text" id="address" name="address" required><br><br>
-
- <label for="phone">Phone:</label>
- <input type="text" id="phone" name="phone" required><br><br>
-
- <button type="submit">Register Agency</button>
- </form>
- <button id="close-registration-form">Close</button>
- </div>
-
-    </div>
-    <script>
- // Basic logic to show/hide the registration form (can be expanded)
- document.getElementById('register-agency-button').addEventListener('click', () => {
- document.getElementById('registration-form').style.display = 'block';
- document.getElementById('login-form').style.display = 'none'; // Optional: hide login form
- });
- document.getElementById('close-registration-form').addEventListener('click', () => {
- document.getElementById('registration-form').style.display = 'none';
- document.getElementById('login-form').style.display = 'block'; // Optional: show login form
- });
-    </script>
-    </div>
-    <script src="auth.js" defer></script>
     <script src="./renderer.js"></script>
 </body>
 </html>

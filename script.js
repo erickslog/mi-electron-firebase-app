@@ -1,6 +1,4 @@
-// Lógica de JavaScript para la Maqueta
 document.addEventListener('DOMContentLoaded', () => { 
-    // Mock data
     const loteriasData = [
         { id: 'lotto_activo', name: 'Lotto Activo', gameType: 'animalitos', numberRangeEnd: 37, draws: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'] },
         { id: 'la_granjita', name: 'La Granjita', gameType: 'animalitos', numberRangeEnd: 37, draws: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'] },
@@ -16,11 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const parentTabs = button.closest('.tabs');
 
             // Remove 'active' class from all buttons in the same container
-            parentTabs.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            parentTabs.querySelectorAll('.tab-button').forEach(btn => { btn.classList.remove('active'); });
 
-            // Add 'active' class to the clicked button
+
             button.classList.add('active');
 
             // TODO: Add logic here to show/hide content areas based on the active tab
@@ -28,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const animalitosNombres = [ // Solo hasta 38 para Lotto Activo/Granjita
+    const animalitosNombres = [
         "Delfín", "Ballena", "Carnero", "Ciempies", "Alacrán", "Rana", "Perico", "Ratón", "Águila", "Tigre",
         "Gato", "Caballo", "Mono", "Paloma", "Zorro", "Oso", "Pavo", "Burro", "Chivo", "Cochino",
         "Gallo", "Perro", "Camello", "Zebra", "Iguana", "Gallina", "Vaca", "Caimán", "Zamuro", "Elefante",
@@ -66,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedDrawTimes = [];
     let selectedPlayValue = '';
 
-    // --- Inicialización de Loterías y Modalidades ---
+
     function initTabs() {
         loteriasData.forEach((loteria, index) => {
             const tab = document.createElement('button');
@@ -105,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function switchLoteria(loteria, tabElement) {
+    function switchLoteria(loteria, tabElement) { // Reset modalidad
         selectedLoteria = loteria;
         document.querySelectorAll('#loterias-tabs .tab-button').forEach(t => t.classList.remove('active'));
         tabElement.classList.add('active');
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.grid-item.selected, .keypad-button.selected').forEach(el => el.classList.remove('selected'));
     }
 
-    // --- Cargar Área de Juego (Animalitos/Teclado) ---
+
     function loadPlayArea() {
         gridContainer.innerHTML = '';
         keypadContainer.innerHTML = '';
@@ -149,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (i >= animalitosNombres.length && selectedLoteria.numberRangeEnd > 37) {
                     item.textContent = `${numStr}`; // Solo número si no hay nombre
                 }
-                item.dataset.value = numStr;
+                item.dataset.value = numStr; // Limpiar búsqueda
                 item.addEventListener('click', () => selectPlayItem(item, numStr));
                 gridContainer.appendChild(item);
             }
@@ -164,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createKeypad() {
-        keypadContainer.innerHTML = ''; // Limpiar antes de crear
+        keypadContainer.innerHTML = '';
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'Borrar', '0', 'OK'].forEach(key => {
             const button = document.createElement('button');
             button.classList.add('keypad-button');
@@ -179,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(playSearchInput.value) {
                         selectedPlayValue = playSearchInput.value;
                         playInputValue.value = selectedPlayValue;
-                        // Aquí podrías agregar lógica para validar si es tripleta y pedir más números
                     }
                 });
             } else {
@@ -196,10 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
         element.classList.add('selected');
         selectedPlayValue = value;
         playInputValue.value = `${value} - ${animalitosNombres[parseInt(value)] || ''}`;
-        playSearchInput.value = ''; // Limpiar búsqueda
+        playSearchInput.value = '';
     }
 
-    // --- Cargar Horarios de Sorteo ---
+
     function loadDrawTimes() {
         drawTimesContainer.innerHTML = '';
         selectedDrawTimes = [];
@@ -224,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Lógica de Búsqueda y Comandos ---
+
     playSearchInput.addEventListener('input', () => {
         const query = playSearchInput.value.toLowerCase();
         if (selectedModalidad === 'animalito') {
@@ -233,13 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.style.display = text.includes(query) ? '' : 'none';
             });
         }
-        // Si es un comando, podría procesarse aquí al presionar Enter o un botón
     });
 
     playSearchInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Evitar submit si estuviera en un form
-            processPlayInputAsCommand();
         }
     });
 
@@ -247,21 +240,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const command = playSearchInput.value.trim().toUpperCase();
         if (!command) return;
 
-        // Lógica simple para comandos P, S, T
-        if (command.startsWith('P') && command.length > 1) { // Permuta
+
+        if (command.startsWith('P') && command.length > 1) {
             selectedPlayValue = command;
             playInputValue.value = `Permuta: ${command.substring(1)}`;
-        } else if (command.startsWith('S') && command.includes('-')) { // Serie
+        } else if (command.startsWith('S') && command.includes('-')) {
             selectedPlayValue = command;
             playInputValue.value = `Serie: ${command.substring(1)}`;
-        } else if (command.startsWith('T') && command.length > 1) { // Terminal
+        } else if (command.startsWith('T') && command.length > 1) {
             selectedPlayValue = command;
             playInputValue.value = `Terminal: ${command.substring(1)}`;
         } else if (selectedModalidad !== 'animalito' && /^\d+$/.test(command)) { // Si es número para triple/tripleta
             selectedPlayValue = command;
             playInputValue.value = command;
-        } else if (selectedModalidad === 'animalito') {
-            // Intenta seleccionar el primer animalito que coincida si no es comando
+        } else if (selectedModalidad === 'animalito') { // Intenta seleccionar el primer animalito que coincida si no es comando
             const firstMatch = Array.from(document.querySelectorAll('.grid-item')).find(item => item.style.display !== 'none');
             if (firstMatch) {
                 selectPlayItem(firstMatch, firstMatch.dataset.value);
@@ -271,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Lógica del Ticket ---
+
     document.querySelectorAll('.amount-button').forEach(btn => {
         btn.addEventListener('click', () => {
             const amountText = btn.dataset.amount;
@@ -291,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = parseFloat(amountInput.value);
         const currency = currencySelect.value;
         let playDescription = selectedPlayValue;
-
+ // Si hay descripción en el input de valor
         if (playInputValue.value && playInputValue.value !== selectedPlayValue) { // Si hay descripción en el input de valor
             playDescription = playInputValue.value;
         } else if (selectedModalidad === 'animalito' && animalitosNombres[parseInt(selectedPlayValue)]) {
@@ -306,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         selectedDrawTimes.forEach(time => {
             const play = {
-                id: Date.now() + Math.random(), // ID único simple
+                id: Date.now() + Math.random(),
                 loteriaName: selectedLoteria.name,
                 modalidad: selectedModalidad,
                 drawTime: time,
@@ -318,14 +310,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         renderTicket();
-        // Limpiar campos después de agregar, excepto lotería y modalidad
-        // selectedDrawTimes.forEach(time => {
-        //     const btn = drawTimesContainer.querySelector(`.draw-time-button[data-time="${time}"]`);
-        //     if (btn) btn.classList.remove('selected');
-        // });
-        // selectedDrawTimes = [];
-        // playSearchInput.value = '';
-        // if(selectedModalidad === 'animalito') clearSelection(); // Solo limpiar selección de animalito
+
+        selectedDrawTimes = [];
+        playSearchInput.value = '';
+         if(selectedModalidad === 'animalito') clearSelection();
+
         amountInput.value = '';
     }
 
@@ -385,11 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('No hay jugadas en el ticket para generar.');
             return;
         }
-        // Aquí iría la lógica para enviar el ticket a Firebase y luego imprimir.
-        // Por ahora, solo simularemos.
+
         const ticketDetails = currentTicket.map(p => `${p.loteriaName} ${p.drawTime}: ${p.play} (${p.currency}${p.amount.toFixed(2)})`).join('\n');
         alert(`Ticket Generado (Simulación):\n--------------------------\n${ticketDetails}\n--------------------------\nTotal Bs: ${totalBsDisplay.textContent.split(': ')[1]}\nTotal USD: ${totalUsdDisplay.textContent.split(': ')[1]}\n\n¡Gracias por su jugada!`);
-        currentTicket = []; // Limpiar ticket después de generar
+        currentTicket = [];
         renderTicket();
     });
 
@@ -415,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
             prizeDetailsDiv.innerHTML = '<p style="color:red;">Por favor, ingrese un número de ticket.</p>';
             return;
         }
-        // Simulación de verificación de ticket
         prizeDetailsDiv.innerHTML = `<p>Verificando ticket: ${ticketNum}...</p><p>El ticket es <strong>GANADOR</strong>.</p><p>Premio: $25.00</p>`;
         confirmPaymentButton.style.display = 'inline-block';
     });
@@ -426,9 +413,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- Atajos de Teclado (Simples) ---
+
     document.addEventListener('keydown', (e) => {
-        // console.log(e.key); // Para depurar qué tecla se presiona
         if (document.activeElement === playSearchInput || document.activeElement === amountInput || document.activeElement === ticketNumberInput) {
             // No interferir si se está escribiendo en un input
             if (e.key === 'Enter' && document.activeElement === playSearchInput) {
@@ -486,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Inicializar
+
     initTabs();
     if (selectedLoteria) loadDrawTimes();
 

@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^36.3.1"
+    "electron": "^36.3.1",
+    "eslint": "^9.27.0"
   },
   "dependencies": {
     "electron-rebuild": "^3.2.9",

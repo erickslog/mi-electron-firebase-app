@@ -1,24 +1,8 @@
-/**
- * This file contains administrative scripts using the Firebase Admin SDK
- * to add documents to Firestore collections (agencies, users, bettingHouses, tickets, dailyClosures).
- * These functions would typically be called from Cloud Functions or other trusted server-side environments.
- */
-
-// Import the Firebase Admin SDK
 const admin = require('firebase-admin');
-
-// You should have already initialized the Admin SDK elsewhere (e.g., in your index.js for Cloud Functions)
-// If not, uncomment and configure the following lines:
-/*
-const serviceAccount = require('./path/to/your/serviceAccountKey.json'); // Replace with your service account key path
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  // Replace with your Firestore database URL if needed
-  // databaseURL: 'https://your-database-name.firebaseio.com'
 });
-*/
-
 const firestore = admin.firestore();
 
 // Function to create a new agency document
@@ -28,7 +12,7 @@ async function createAgency(agencyData) {
     console.log("Agency document written with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error adding agency document:", error);
+    console.error("Error adding agency document:", error); // Re-throw the error for handling in the calling function
     throw error; // Re-throw the error for handling in the calling function
   }
 }
@@ -40,7 +24,7 @@ async function createUser(userData) {
     console.log("User document written with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error adding user document:", error);
+    console.error("Error adding user document:", error); // Re-throw the error for handling in the calling function
     throw error; // Re-throw the error for handling in the calling function
   }
 }
@@ -52,7 +36,7 @@ async function createBettingHouse(bettingHouseData) {
     console.log("Betting house document written with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error adding betting house document:", error);
+    console.error("Error adding betting house document:", error); // Re-throw the error for handling in the calling function
     throw error; // Re-throw the error for handling in the calling function
   }
 }
@@ -64,7 +48,7 @@ async function createTicket(ticketData) {
     console.log("Ticket document written with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error adding ticket document:", error);
+    console.error("Error adding ticket document:", error); // Re-throw the error for handling in the calling function
     throw error; // Re-throw the error for handling in the calling function
   }
 }
@@ -76,7 +60,7 @@ async function createDailyClosure(closureData) {
     console.log("Daily closure document written with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error adding daily closure document:", error);
+    console.error("Error adding daily closure document:", error); // Re-throw the error for handling in the calling function
     throw error; // Re-throw the error for handling in the calling function
   }
 }
