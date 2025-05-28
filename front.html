@@ -12,19 +12,61 @@
     <header class="header">
         <h1>T-Gestor: Panel de Taquillero</h1>
     </header>
-
+    <div class="header">
+        <div class="header-left">
+            <!-- Logo and Title -->
+            <img src="logo.png" alt="MaxPlay Logo" class="logo">
+            <h1>Taquilla de Venta</h1>
+        </div>
+        <div class="header-right">
+            <!-- Date and Time -->
+            <div class="datetime">AG. TECHNOLOGY 09:22:04 a.m 28/05/25</div>
+            <!-- Icons -->
+            <div class="icons">
+                <img src="icon1.png" alt="Icon 1">
+                <img src="icon2.png" alt="Icon 2">
+                <img src="icon3.png" alt="Icon 3">
+            </div>
+        </div>
+    </div>
     <div class="main-container">
-        <div id="selection-panel" class="panel">
-            <h3>Selección de Lotería y Jugada</h3>
-            <div class="tabs" id="loterias-tabs">
-                </div>
-            <div class="tabs" id="modalidad-tabs">
-                </div>
-            <input type="text" id="play-search-input" class="search-bar" placeholder="Buscar animalito/número o ingresar comando (P123, S100-109, T12)...">
-            <div id="grid-container">
-                </div>
-            <div id="keypad-container">
-                </div>
+        <div class="left-panel">
+            <div class="tabs">
+                <button class="tab-button">Triples</button>
+                <button class="tab-button">Animalitos</button>
+                <button class="tab-button">Tripleta</button>
+            </div>
+            <div class="input-fields">
+                <label for="animalito">Animalito/Número:</label>
+                <input type="text" id="animalito">
+                <label for="monto">Monto:</label>
+                <input type="text" id="monto">
+                 <label for="bs">Bs</label>
+            </div>
+            <div class="lottery-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>LOTERIA</th>
+                            <th>CIERRE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Lottery rows will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="tabs">
+                <button class="tab-button">Triples y Terminales</button>
+                <button class="tab-button">Animalitos</button>
+                <button class="tab-button">Tripleta</button>
+                <button class="tab-button">Opciones</button>
+            </div>
+            <div class="details-section">
+                <!-- Ticket or other details will be displayed here -->
+            </div>
         </div>
 
         <div id="config-panel" class="panel">
@@ -89,6 +131,27 @@
             </div>
         </div>
     </div>
+
+    <div class="footer">
+    <div class="status-message">
+        <!-- Status messages will be displayed here -->
+        Por Favor Seleccione los Animalitos Para Jugar Aniley
+    </div>
+    <div class="function-keys">
+        <!-- Function key buttons will be added here -->
+        <button>[F1] Sorteos</button>
+        <button>[F2] Limpiar</button>
+        <button>[F3] Anular</button>
+        <button>[F4] Repetir</button>
+        <button>[F5] Pagar</button>
+        <button>[F6] Eliminar</button>
+        <button>[F7] Ventas</button>
+        <button>[F8] Terminal</button>
+        <button>[F9] Cambio</button>
+        <button>[F12] Imprimir</button>
+    </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>

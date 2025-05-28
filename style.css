@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Header, Main Content, Footer */
+
 h1 { /* Selector más específico para evitar conflictos */
     color: #333; /* Color de encabezado */
     margin-bottom: 30px; /* Espacio debajo del encabezado */
@@ -91,18 +95,110 @@ button:hover { /* Estilo al pasar el ratón por encima */
 }
 
 /* Styling for the Unified Cashier Control Panel (front.html) */
-.main-container {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr; /* Example: Left and Right are equal, Middle is wider */
-    gap: 20px; /* Space between columns */
+.header {
+ display: flex;
+    justify-content: space-between;
+ width: 100%; /* Ensure header takes full width */
+ box-sizing: border-box; /* Include padding in width */
+    align-items: center;
     padding: 20px;
-    min-height: 100vh; /* Occupy at least the full viewport height */
+    background-color: #f0f0f0; /* Or the color in the screenshot */
+    border-bottom: 1px solid #ccc;
 }
 
-.panel {
-    background-color: #fff;
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Adjust the ratio as needed */
+ width: 100%; /* Ensure main content takes full width */
+ box-sizing: border-box; /* Include padding in width */
+    padding: 10px;
+    gap: 10px; /* Space between left and right panels */
+}
+
+.footer {
+    padding: 10px;
+    background-color: #f0f0f0; /* Or the color in the screenshot */
+    border-top: 1px solid #ccc;
+ display: flex;
+    justify-content: space-between;
+    align-items: center;
+ width: 100%; /* Ensure footer takes full width */
+ box-sizing: border-box; /* Include padding in width */
+}
+
+.left-panel, .right-panel {
+ border: 1px solid #ccc; /* Add a border to visualize the panels */
+ padding: 10px;
+}
+
+.tabs {
+ display: flex;
+ margin-bottom: 10px;
+}
+
+.tab-button {
+ padding: 10px;
+ border: none;
+ background-color: #eee; /* Default tab color */
+ cursor: pointer;
+ margin-right: 5px;
+}
+
+.input-fields {
+ margin-bottom: 10px;
+}
+
+.input-fields label {
+ margin-right: 5px;
+}
+
+.input-fields input {
+ margin-right: 10px;
+ padding: 5px;
+ border: 1px solid #ccc;
+}
+
+.lottery-table table {
+ width: 100%;
+ border-collapse: collapse;
+}
+
+.lottery-table th, .lottery-table td {
+ border: 1px solid #ccc;
+ padding: 8px;
+ text-align: left;
+
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* Add specific styling for each panel as needed */
+}
+
+.tab-button.active {
+ background-color: #ccc; /* Active tab color */
+}
+
+.lottery-table th {
+ background-color: #eee;
+}
+
+.details-section {
+    border: 1px solid #ccc; /* Add a border to visualize the section */
+    padding: 10px;
+    min-height: 150px; /* Give it a minimum height */
+}
+
+.status-message {
+ flex-grow: 1; /* Allow it to take up available space */
+ margin-right: 10px;
+}
+
+.function-keys button {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    cursor: pointer;
+}
+
 }

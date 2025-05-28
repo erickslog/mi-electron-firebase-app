@@ -8,6 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'zulia_millonario', name: 'Zulia Millonario', gameType: 'triples', numberRangeEnd: 999, draws: ['12:45', '16:45', '19:00'] }
     ];
 
+    const tabButtons = document.querySelectorAll('.tabs .tab-button');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Get the parent container of the clicked tab (either left-panel or right-panel)
+            const parentTabs = button.closest('.tabs');
+
+            // Remove 'active' class from all buttons in the same container
+            parentTabs.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked button
+            button.classList.add('active');
+
+            // TODO: Add logic here to show/hide content areas based on the active tab
+        });
+    });
+
+
     const animalitosNombres = [ // Solo hasta 38 para Lotto Activo/Granjita
         "Delfín", "Ballena", "Carnero", "Ciempies", "Alacrán", "Rana", "Perico", "Ratón", "Águila", "Tigre",
         "Gato", "Caballo", "Mono", "Paloma", "Zorro", "Oso", "Pavo", "Burro", "Chivo", "Cochino",

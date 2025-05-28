@@ -18,6 +18,12 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CR
   }
 });
 
+// Test user for local testing only - NOT SECURE FOR PRODUCTION
+const testUser = {
+    username: 'test_admin',
+    password: 'password123'
+};
+
 // Función para ejecutar consultas como una promesa
 const runQuery = (sql, params = []) => {
     return new Promise((resolve, reject) => {
@@ -141,6 +147,6 @@ module.exports = {
     run: runQuery,
     get: getQuery,
     all: allQuery,
-    transaction: runTransaction,
+    transaction: runTransaction, // Corrected export name
     close: closeDatabase
 };

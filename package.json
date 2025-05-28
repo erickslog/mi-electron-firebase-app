@@ -13,6 +13,8 @@
     "electron": "^36.3.1"
   },
   "dependencies": {
-    "firebase": "^11.8.1"
+    "electron-rebuild": "^3.2.9",
+    "firebase": "^11.8.1",
+    "sqlite3": "^5.1.7"
   }
 }
